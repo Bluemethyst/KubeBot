@@ -1,0 +1,5 @@
+{
+  "author": "Bluemethyst",
+  "title": "Item Example",
+  "body": "This is an example of a simple custom item. \n```js\nStartupEvents.registry('item', event => {\n\tevent.create('example_item')})"
+}

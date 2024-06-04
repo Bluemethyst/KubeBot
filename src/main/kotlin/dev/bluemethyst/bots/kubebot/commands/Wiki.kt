@@ -25,20 +25,12 @@ fun wiki() = subcommand("Wiki") {
                 }
             } else {
                 println("${CONFIG.githubWikiUrl}${response[0].url}/page.kubedoc")
+                println(response)
                 interactionResponse.respond {
-                    menu {
-                        embed {
-                            title = "Search Results"
-                            description = response.joinToString("\n") {
-                                "[${it.name}](${CONFIG.kubejsUrl}${it.url})"
-                            }
-                        }
-                        buttons {
-                            for (result in response) {
-                                button(result.name, Emojis.`100`) {
-                                    fetchGithub(result.url)
-                                }
-                            }
+                    embed {
+                        title = "Search Results"
+                        description = response.joinToString("\n") {
+                            "[${it.name}](${CONFIG.kubejsUrl}${it.url})"
                         }
                     }
                 }
@@ -61,7 +53,7 @@ fun wiki() = subcommand("Wiki") {
                 val interactionResponse = interaction?.deferPublicResponse() ?: return@execute
                 fetchGithub("/wiki/tutorials/recipes")
                 interactionResponse.respond {
-                    content = "complete"
+                    content = args.first
                 }
             }
         }
